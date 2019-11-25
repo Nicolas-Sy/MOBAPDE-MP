@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SpareChange</string>
+    <string name="title_activity_home_page">homePage</string>
 </resources>
