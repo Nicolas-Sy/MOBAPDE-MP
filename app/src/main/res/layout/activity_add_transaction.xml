@@ -16,7 +16,7 @@
         android:layout_marginStart="121dp"
         android:layout_marginLeft="121dp"
         android:layout_marginTop="161dp"
-        android:inputType="numberDecimal" />
+        />
 
     <Button
         android:id="@+id/buttonBack3"
@@ -172,7 +172,7 @@
         android:layout_marginStart="76dp"
         android:layout_marginLeft="76dp"
         android:layout_marginTop="580dp"
-        android:onClick="createPost"
+        android:onClick="createTransaction"
         android:text="Post" />
 
 

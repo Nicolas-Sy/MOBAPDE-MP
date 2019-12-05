@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "858981283814",
+    "firebase_url": "https://sparechange-67b16.firebaseio.com",
+    "project_id": "sparechange-67b16",
+    "storage_bucket": "sparechange-67b16.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:858981283814:android:2bbf87a9f19858ac2a4827",
+        "android_client_info": {
+          "package_name": "com.example.sparechange"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "858981283814-9s3nttev2t1kusojaobmv56rijeavpgq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sparechange",
+            "certificate_hash": "0151d8cb13430626e3de73983b21e6091b6f1bfe"
+          }
+        },
+        {
+          "client_id": "858981283814-fs3mahi40vtfmucb784mvi3savv33h40.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACRcix-9RceenTSxPyAXnqyHuVg1BYhMQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "858981283814-fs3mahi40vtfmucb784mvi3savv33h40.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
