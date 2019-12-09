@@ -1,79 +1,42 @@
 {
   "project_info": {
-    "project_number": "348557056206",
-    "firebase_url": "https://mobapde-mp-1f006.firebaseio.com",
-    "project_id": "mobapde-mp-1f006",
-    "storage_bucket": "mobapde-mp-1f006.appspot.com"
+    "project_number": "858981283814",
+    "firebase_url": "https://sparechange-67b16.firebaseio.com",
+    "project_id": "sparechange-67b16",
+    "storage_bucket": "sparechange-67b16.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:348557056206:android:9a6f23b1334ed01493d89f",
-        "android_client_info": {
-          "package_name": "com.example.mobapdemp"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "348557056206-kkpri2pn8hi8og9bn41ml380usqkc89n.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.mobapdemp",
-            "certificate_hash": "d9183e9870f3705ad2cfac1526cc4724ab114357"
-          }
-        },
-        {
-          "client_id": "348557056206-i6ggrcgo0nvt018hohvd611l7t75kan7.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyADB7DLVyaYC_swTPfkqyBOkLUe2YmjgBY"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "348557056206-i6ggrcgo0nvt018hohvd611l7t75kan7.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:348557056206:android:c17b6cac78be1e5d93d89f",
+        "mobilesdk_app_id": "1:858981283814:android:2bbf87a9f19858ac2a4827",
         "android_client_info": {
           "package_name": "com.example.sparechange"
         }
       },
       "oauth_client": [
         {
-          "client_id": "348557056206-rrvnqcaqcq7milsogk5e4cl4104ac245.apps.googleusercontent.com",
+          "client_id": "858981283814-9s3nttev2t1kusojaobmv56rijeavpgq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.sparechange",
-            "certificate_hash": "b59296be6fa72b999788f1255642bbffda1db04b"
+            "certificate_hash": "0151d8cb13430626e3de73983b21e6091b6f1bfe"
           }
         },
         {
-          "client_id": "348557056206-i6ggrcgo0nvt018hohvd611l7t75kan7.apps.googleusercontent.com",
+          "client_id": "858981283814-fs3mahi40vtfmucb784mvi3savv33h40.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyADB7DLVyaYC_swTPfkqyBOkLUe2YmjgBY"
+          "current_key": "AIzaSyACRcix-9RceenTSxPyAXnqyHuVg1BYhMQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "348557056206-i6ggrcgo0nvt018hohvd611l7t75kan7.apps.googleusercontent.com",
+              "client_id": "858981283814-fs3mahi40vtfmucb784mvi3savv33h40.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
