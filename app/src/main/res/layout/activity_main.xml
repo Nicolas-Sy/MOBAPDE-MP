@@ -6,13 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <include
+        android:id = "@+id/toolbar"
+        layout="@layout/toolbar"
+        />
+
     <TextView
         android:id="@+id/textViewSort"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="70dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="47dp"
+        android:layout_marginLeft="47dp"
+        android:layout_marginTop="147dp"
         android:text="Amount:"
         android:textSize="20dp" />
 
@@ -44,14 +52,14 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="145dp"
-        android:layout_marginLeft="145dp"
-        android:layout_marginTop="22dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="143dp"
+        android:layout_marginLeft="143dp"
+        android:layout_marginTop="65dp"
         android:text="SpareChange"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
@@ -65,7 +73,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="149dp"
         android:layout_marginLeft="149dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="148dp"
         android:text="totalAmount"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
