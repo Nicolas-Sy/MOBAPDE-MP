@@ -38,9 +38,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="104dp"
-        android:layout_marginLeft="104dp"
-        android:layout_marginTop="26dp" />
+        android:layout_marginStart="105dp"
+        android:layout_marginLeft="105dp"
+        android:layout_marginTop="18dp" />
 
     <EditText
         android:id="@+id/tAmount"
@@ -101,7 +101,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:onClick="checkButton"
-            android:text="Expenses" />
+            android:text="Expense" />
 
         <RadioButton
             android:id="@+id/btnIncome"

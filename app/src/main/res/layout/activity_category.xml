@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CategoryActivity">
+
+    <include
+        android:id = "@+id/toolbar"
+        layout="@layout/toolbar"
+        />
+
+    <Button
+        android:id="@+id/foodCat"
+        android:layout_width="101dp"
+        android:layout_height="90dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="145dp"
+        android:onClick="ChosenCategory"
+        android:text="Food" />
+
+    <Button
+        android:id="@+id/transportationCat"
+        android:layout_width="101dp"
+        android:layout_height="90dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="285dp"
+        android:layout_marginLeft="285dp"
+        android:layout_marginTop="147dp"
+        android:onClick="ChosenCategory"
+        android:text="Transportation" />
+
+    <Button
+        android:id="@+id/insuranceCat"
+        android:layout_width="101dp"
+        android:layout_height="90dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="26dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="271dp"
+        android:onClick="ChosenCategory"
+        android:text="Insurance" />
+
+    <Button
+        android:id="@+id/shopCat"
+        android:layout_width="101dp"
+        android:layout_height="90dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="159dp"
+        android:layout_marginLeft="159dp"
+        android:layout_marginTop="275dp"
+        android:onClick="ChosenCategory"
+        android:text="Shopping" />
+
+    <Button
+        android:id="@+id/entertainmentCat"
+        android:layout_width="101dp"
+        android:layout_height="90dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="287dp"
+        android:layout_marginLeft="287dp"
+        android:layout_marginTop="276dp"
+        android:onClick="ChosenCategory"
+        android:text="Entertainment" />
+
+    <Button
+        android:id="@+id/billsCat"
+        android:layout_width="101dp"
+        android:layout_height="90dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="155dp"
+        android:layout_marginLeft="155dp"
+        android:layout_marginTop="147dp"
+        android:onClick="ChosenCategory"
+        android:text="Bills" />
+
+</RelativeLayout>

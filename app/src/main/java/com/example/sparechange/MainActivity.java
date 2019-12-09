@@ -2,14 +2,20 @@ package com.example.sparechange;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.sparechange.Model.Transaction;
 import com.google.firebase.database.DataSnapshot;
@@ -40,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
         totalAmount = findViewById(R.id.totalAmount);
 
         transactions = new ArrayList<>();
-
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         listViewTransactions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
@@ -100,6 +107,28 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.example_menu, menu);
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.item1:
+                Toast.makeText(this,"Item 1 Selected", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.item2:
+                Toast.makeText(this,"Item 2Selected", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
 
     public void AddTransaction(View v){
         Intent intent = new Intent(this, addTransactionActivity.class);
