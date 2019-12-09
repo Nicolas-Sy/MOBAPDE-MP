@@ -21,7 +21,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class addTransaction extends AppCompatActivity {
+public class addTransactionActivity extends AppCompatActivity {
 
     EditText tName, tAmount, tCategory;
     RadioGroup type_radio;

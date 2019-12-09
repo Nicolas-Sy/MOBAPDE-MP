@@ -9,8 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CategoryActivity"></activity>
-        <activity android:name=".addTransaction" />
+        <activity android:name=".BudgetBreakdownActivity"></activity>
+        <activity android:name=".PerTransactionActivity" />
+        <activity android:name=".UserProfileActivity" />
+        <activity android:name=".chooseCategoryActivity" />
+        <activity android:name=".addTransactionActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
