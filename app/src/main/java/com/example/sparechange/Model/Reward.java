@@ -26,7 +26,7 @@ public class Reward {
         return company;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
