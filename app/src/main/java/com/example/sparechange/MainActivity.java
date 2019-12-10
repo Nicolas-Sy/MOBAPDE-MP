@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     List<Transaction> transactions;
     ListView listViewTransactions;
     TextView totalAmount;
-    float total = 0, total2;
+    float total, total2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

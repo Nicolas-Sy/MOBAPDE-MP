@@ -9,16 +9,21 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.Toast;
 
 public class CategoryActivity extends AppCompatActivity {
+    GridView gridView;
 
+    String[] categoryNames = {"Food"};
+    ///int[] categoryImage = {R.drawable.one, R.drawabe}
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
+        gridView = findViewById(R.id.grid_view);
         setSupportActionBar(toolbar);
     }
 
