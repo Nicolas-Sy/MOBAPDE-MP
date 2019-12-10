@@ -135,6 +135,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void OpenBudgetBreakdownActivity(View v){
+        Intent intent = new Intent(this, BudgetBreakdownActivity.class);
+        startActivity(intent);
+    }
+
     public float updateMoney(float money){
         total += money;
         return total;
