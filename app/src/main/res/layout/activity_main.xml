@@ -116,10 +116,6 @@
         android:layout_marginStart="124dp"
         android:layout_marginLeft="124dp"
         android:layout_marginTop="628dp"
-<<<<<<< HEAD
-=======
-
->>>>>>> 2c5234180478441e7d156f683c427f69c8854653
         android:onClick="AddTransaction"
         android:text="add Transaction"
         android:textColor="@color/colorPrimary" />

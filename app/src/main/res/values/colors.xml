@@ -4,10 +4,8 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorWhite">#FFFFFF</color>
-<<<<<<< HEAD
+
     <color name="colorGray">#EDEDED</color>
     <color name="colorDarkGray">#757575</color>
-=======
-    
->>>>>>> 2c5234180478441e7d156f683c427f69c8854653
+
 </resources>
