@@ -69,12 +69,12 @@ public class MainActivity extends AppCompatActivity {
                 transactions.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Transaction per_transaction = postSnapshot.getValue(Transaction.class);
-                    total += per_transaction.getAmount();
-                    totalAmount.setText(total + "");
-                    transactions.add(per_transaction);
+                   total += per_transaction.getAmount();
+                   totalAmount.setText(total + "");
+                  transactions.add(per_transaction);
                 }
-                TransactionList transactionAdapter = new TransactionList(MainActivity.this ,transactions);
-                listViewTransactions.setAdapter(transactionAdapter);
+               TransactionList transactionAdapter = new TransactionList(MainActivity.this ,transactions);
+               listViewTransactions.setAdapter(transactionAdapter);
             }
 
             @Override

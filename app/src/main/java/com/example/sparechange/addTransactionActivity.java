@@ -33,6 +33,7 @@ public class addTransactionActivity extends AppCompatActivity {
     Date currentTime = Calendar.getInstance().getTime();
     DatabaseReference databaseTransactions, databaseCategories;
     TextView tCategory;
+    String type;
     private static final String TRANSACTION_NAME = "TRANSACTION_NAME", TRANSACTION_ID = "TRANSACTION_ID", TRANSACTION_AMOUNT = "TRANSACTION_AMOUNT";
 
     @Override
@@ -59,13 +60,22 @@ public class addTransactionActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1 ){
+            if(resultCode == 1)
+            {
+                tCategory.setText(data.getStringExtra("CATEGORY"));
+                type = data.getStringExtra("TYPE");
+            }
+
+        }
     }
+
 
     public void checkButton(View v) {
         int radioId = type_radio.getCheckedRadioButtonId();
         typeBtn = findViewById(radioId);
 
-        Toast.makeText(this, "Selected Radio Button: " + typeBtn, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Selected Radio Button: " + typeBtn.getText(), Toast.LENGTH_SHORT).show();
     }
 
     public void createTransaction(View v) {
@@ -74,12 +84,11 @@ public class addTransactionActivity extends AppCompatActivity {
         String category = tCategory.getText().toString();
         float amount = Float.parseFloat(tAmount.getText().toString()) * -1;
         float amount2 = Float.parseFloat(tAmount.getText().toString());
-        String type = typeBtn.getText().toString();
 
         if (!(TextUtils.isEmpty(name) && TextUtils.isEmpty(type))) {
             String id = databaseTransactions.push().getKey();
 
-            if (type.equals("Expenses")) {
+            if (type.equals("Expense")) {
                 Transaction transaction = new Transaction(id, name, type, category, amount, currentTime);
                 databaseTransactions.child(id).setValue(transaction);
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);

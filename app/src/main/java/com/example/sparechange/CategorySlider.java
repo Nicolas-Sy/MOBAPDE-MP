@@ -2,8 +2,7 @@ package com.example.sparechange;
 
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,8 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
-import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +42,8 @@ public class CategorySlider extends AppCompatActivity {
         Adapter.AddFragmentPage(new IncomeFragment(), "Income");
         viewpage.setAdapter(Adapter);
     }
+
+
     public class myViewPageAdapter extends FragmentPagerAdapter{
         private List<Fragment> myFragment = new ArrayList<>();
         private List<String> myPageTitle = new ArrayList<>();
