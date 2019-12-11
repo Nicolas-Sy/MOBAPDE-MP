@@ -6,89 +6,120 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/buttonBudgetBreakdownActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="220dp"
-        android:layout_marginLeft="220dp"
-        android:layout_marginTop="623dp"
-        android:onClick="OpenBudgetBreakdownActivity"
-        android:text="Budget Breakdown" />
 
     <include
-        android:id = "@+id/toolbar"
-        layout="@layout/toolbar"
-        />
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
 
-    <TextView
-        android:id="@+id/textViewSort"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="47dp"
-        android:layout_marginLeft="47dp"
-        android:layout_marginTop="147dp"
-        android:text="Amount:"
-        android:textSize="20dp" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="372dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/toolbar"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="20dp">
 
-    <Button
-        android:id="@+id/addTransacBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="44dp"
-        android:layout_marginLeft="44dp"
-        android:layout_marginTop="624dp"
-        android:onClick="AddTransaction"
-        android:text="add Transaction" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Income"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textViewIncome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="₱ 20000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textViewExpenses"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Expenses"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="₱ 12000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textViewBalance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Balance"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="₱ 8000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
     <ListView
         android:id="@+id/listViewPosts"
         android:layout_width="372dp"
         android:layout_height="396dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:layout_below="@id/cardView"
         android:layout_centerVertical="true"
         android:layout_marginStart="22dp"
         android:layout_marginLeft="22dp"
-        android:layout_marginTop="209dp" />
+        android:layout_marginTop="20dp" />
 
-    <TextView
-        android:id="@+id/textView"
+    <Button
+        android:id="@+id/addTransacBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="143dp"
-        android:layout_marginLeft="143dp"
-        android:layout_marginTop="65dp"
-        android:text="SpareChange"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-
-    <TextView
-        android:id="@+id/totalAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="149dp"
-        android:layout_marginLeft="149dp"
-        android:layout_marginTop="148dp"
-        android:text="totalAmount"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+        android:layout_marginStart="124dp"
+        android:layout_marginLeft="124dp"
+        android:layout_marginTop="628dp"
+        android:background="@drawable/element_outline"
+        android:onClick="AddTransaction"
+        android:text="add Transaction"
+        android:textColor="@color/colorPrimary" />
 
 
 </RelativeLayout>
