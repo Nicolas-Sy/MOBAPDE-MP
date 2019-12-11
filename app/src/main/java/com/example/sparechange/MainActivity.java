@@ -44,15 +44,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         databaseTransactions = FirebaseDatabase.getInstance().getReference("transactions");
         databaseUser = FirebaseDatabase.getInstance().getReference("users");
-<<<<<<< HEAD
+
         totalAmount = findViewById(R.id.totalAmount);
         listViewTransactions = (ListView) findViewById(R.id.listViewPosts);
         addTransacBtn = findViewById(R.id.addTransacBtn);
-=======
+
         addTransacBtn = findViewById(R.id.addTransacBtn);
         listViewTransactions = findViewById(R.id.listViewPosts);
         totalAmount = findViewById(R.id.textViewBalance);
->>>>>>> 2c5234180478441e7d156f683c427f69c8854653
+
 
         transactions = new ArrayList<>();
 
