@@ -3,11 +3,14 @@ package com.example.sparechange;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -23,16 +26,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class addTransactionActivity extends AppCompatActivity {
+public class addTransactionActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     EditText tName, tAmount;
-    RadioGroup type_radio;
-    RadioButton typeBtn;
     List<Transaction> transactions;
     Button save;
     Date currentTime = Calendar.getInstance().getTime();
     DatabaseReference databaseTransactions, databaseCategories;
-    TextView tCategory;
+    TextView tCategory, dateText;
     String type;
     private static final String TRANSACTION_NAME = "TRANSACTION_NAME", TRANSACTION_ID = "TRANSACTION_ID", TRANSACTION_AMOUNT = "TRANSACTION_AMOUNT";
 
@@ -44,13 +45,9 @@ public class addTransactionActivity extends AppCompatActivity {
         tName = findViewById(R.id.tName);
         tAmount = findViewById(R.id.tAmount);
         tCategory = findViewById(R.id.tCategory);
-
-        type_radio = findViewById(R.id.type_radio);
+        dateText = findViewById(R.id.textViewDate);
 
         transactions = new ArrayList<>();
-
-
-
     }
     public void onClick(View v){
         Intent i = new Intent(getApplicationContext(),CategorySlider.class);
@@ -68,14 +65,6 @@ public class addTransactionActivity extends AppCompatActivity {
             }
 
         }
-    }
-
-
-    public void checkButton(View v) {
-        int radioId = type_radio.getCheckedRadioButtonId();
-        typeBtn = findViewById(radioId);
-
-        Toast.makeText(this, "Selected Radio Button: " + typeBtn.getText(), Toast.LENGTH_SHORT).show();
     }
 
     public void createTransaction(View v) {
@@ -117,6 +106,24 @@ public class addTransactionActivity extends AppCompatActivity {
             Toast.makeText(this, "Please enter a name and content", Toast.LENGTH_LONG).show();
         }
 
+    }
+
+    public void Date(View v){
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                this,
+                Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        );
+
+        datePickerDialog.show();
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        String date = "Month/Day/Year: " + (month+1) + "/" + dayOfMonth + "/" + year;
+        dateText.setText(date);
     }
 
     public void Back(View v){

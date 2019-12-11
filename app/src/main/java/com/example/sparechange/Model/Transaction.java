@@ -21,7 +21,6 @@ public class Transaction {
         this.transaction_category = transaction_category;
         this.amount = amount;
         this.transaction_date = transaction_date;
-
     }
 
     public String getTransaction_name(){
@@ -42,5 +41,9 @@ public class Transaction {
 
     public float getAmount(){
         return amount;
+    }
+
+    public Date getTransaction_date() {
+        return transaction_date;
     }
 }
