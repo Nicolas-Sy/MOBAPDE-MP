@@ -13,5 +13,5 @@
         android:textColor="@color/colorPrimary"
         android:fontFamily="@font/royalacid_o"
         android:textSize="30dp"/>
-    
+
 </androidx.appcompat.widget.Toolbar>
