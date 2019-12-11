@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         databaseUser = FirebaseDatabase.getInstance().getReference("users");
         addTransacBtn = findViewById(R.id.addTransacBtn);
         listViewTransactions = findViewById(R.id.listViewPosts);
-        totalAmount = findViewById(R.id.totalAmount);
+        totalAmount = findViewById(R.id.textViewBalance);
 
         transactions = new ArrayList<>();
         Toolbar toolbar = findViewById(R.id.toolbar);

@@ -1,5 +1,6 @@
 package com.example.sparechange;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -52,8 +53,14 @@ public class addTransactionActivity extends AppCompatActivity {
     }
     public void onClick(View v){
         Intent i = new Intent(getApplicationContext(),CategorySlider.class);
-        startActivity(i);
+        startActivityForResult(i, 1);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     public void checkButton(View v) {
         int radioId = type_radio.getCheckedRadioButtonId();
         typeBtn = findViewById(radioId);
