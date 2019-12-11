@@ -43,4 +43,8 @@ public class Transaction {
     public float getAmount(){
         return amount;
     }
+
+    public Date getTransaction_date() {
+        return transaction_date;
+    }
 }
