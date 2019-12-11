@@ -116,4 +116,9 @@ public class addTransactionActivity extends AppCompatActivity {
         finish();
     }
 
+    public void budgetBreakdown(View v){
+        Intent intent = new Intent(this,BudgetBreakdownActivity.class);
+        startActivity(intent);
+        finish();
+    }
     }
