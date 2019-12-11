@@ -12,10 +12,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.example.sparechange.Model.Transaction;
 import com.google.firebase.database.DataSnapshot;
@@ -28,12 +26,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    Button addTransacBtn;
     DatabaseReference databaseTransactions, databaseUser;
     List<Transaction> transactions;
     ListView listViewTransactions;
     TextView totalAmount;
+    Button addTransacBtn;
     float total, total2;
+
+    //EXAMPLE
+//    String[] fruitname={"Mango", "Banana"};
+//    String[] desc={"This is Mango", "This is Banana"};
+//    Integer[] imgid={R.drawable.ic_arrow_back, R.drawable.siomaichaofan};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +44,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         databaseTransactions = FirebaseDatabase.getInstance().getReference("transactions");
         databaseUser = FirebaseDatabase.getInstance().getReference("users");
-        addTransacBtn = findViewById(R.id.addTransacBtn);
-        listViewTransactions = findViewById(R.id.listViewPosts);
         totalAmount = findViewById(R.id.totalAmount);
+        listViewTransactions = (ListView) findViewById(R.id.listViewPosts);
+        addTransacBtn = findViewById(R.id.addTransacBtn);
 
         transactions = new ArrayList<>();
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+
         listViewTransactions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
@@ -61,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         databaseTransactions.addValueEventListener(new ValueEventListener() {
             int z = 0;
             @Override
@@ -84,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
+
+
 /*
         databaseTransactions.addValueEventListener(new ValueEventListener() {
             @Override

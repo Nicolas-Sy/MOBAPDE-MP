@@ -1,32 +1,10 @@
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    android:orientation="vertical" android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent">-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/textViewTitle"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="TextView" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/textViewCategory"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="TextView" />-->
-<!--    <TextView-->
-<!--        android:id="@+id/textViewDate"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="TextView" />-->
-<!--</LinearLayout>-->
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="10dp">
 
+<!--    UNUSED CLASS: NOT DELETING IT MUNA -->
     <ImageView
         android:id="@+id/imageViewIcon"
         android:layout_width="40dp"
@@ -35,7 +13,7 @@
         android:src="@drawable/ic_profile" />
 
     <TextView
-        android:id="@+id/textViewTitle"
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -46,12 +24,12 @@
 
 
     <TextView
-        android:id="@+id/textViewCategory"
+        android:id="@+id/category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/name"
         android:layout_marginTop="5dp"
         android:text="[CATEGORY]"
-        android:layout_below="@+id/textViewTitle"
         android:layout_toRightOf="@id/imageViewIcon"
         android:textColor="@android:color/black" />
 
@@ -73,7 +51,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textViewDate"
+            android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="[DATE]"
