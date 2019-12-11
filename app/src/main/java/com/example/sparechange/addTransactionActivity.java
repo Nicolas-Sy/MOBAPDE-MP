@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sparechange.Model.Transaction;
@@ -23,14 +24,14 @@ import java.util.List;
 
 public class addTransactionActivity extends AppCompatActivity {
 
-    EditText tName, tAmount, tCategory;
+    EditText tName, tAmount;
     RadioGroup type_radio;
     RadioButton typeBtn;
     List<Transaction> transactions;
     Button save;
     Date currentTime = Calendar.getInstance().getTime();
     DatabaseReference databaseTransactions, databaseCategories;
-
+    TextView tCategory;
     private static final String TRANSACTION_NAME = "TRANSACTION_NAME", TRANSACTION_ID = "TRANSACTION_ID", TRANSACTION_AMOUNT = "TRANSACTION_AMOUNT";
 
     @Override
@@ -46,8 +47,13 @@ public class addTransactionActivity extends AppCompatActivity {
 
         transactions = new ArrayList<>();
 
-    }
 
+
+    }
+    public void onClick(View v){
+        Intent i = new Intent(getApplicationContext(),CategorySlider.class);
+        startActivity(i);
+    }
     public void checkButton(View v) {
         int radioId = type_radio.getCheckedRadioButtonId();
         typeBtn = findViewById(radioId);
