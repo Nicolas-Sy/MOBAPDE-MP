@@ -12,7 +12,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -24,14 +23,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     Button addTransacBtn;
     DatabaseReference databaseTransactions, databaseUser;
+
     List<Transaction> transactions;
     ListView listViewTransactions;
+
     TextView totalAmount;
     float total = 0, total2;
 
@@ -43,16 +43,15 @@ public class MainActivity extends AppCompatActivity {
         databaseUser = FirebaseDatabase.getInstance().getReference("users");
         addTransacBtn = findViewById(R.id.addTransacBtn);
         listViewTransactions = findViewById(R.id.listViewPosts);
-        totalAmount = findViewById(R.id.totalAmount);
 
-        transactions = new ArrayList<>();
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         listViewTransactions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
                 Transaction transaction = transactions.get(i);
-
             }
         });
 
