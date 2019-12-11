@@ -44,9 +44,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         databaseTransactions = FirebaseDatabase.getInstance().getReference("transactions");
         databaseUser = FirebaseDatabase.getInstance().getReference("users");
+<<<<<<< HEAD
         totalAmount = findViewById(R.id.totalAmount);
         listViewTransactions = (ListView) findViewById(R.id.listViewPosts);
         addTransacBtn = findViewById(R.id.addTransacBtn);
+=======
+        addTransacBtn = findViewById(R.id.addTransacBtn);
+        listViewTransactions = findViewById(R.id.listViewPosts);
+        totalAmount = findViewById(R.id.textViewBalance);
+>>>>>>> 2c5234180478441e7d156f683c427f69c8854653
 
         transactions = new ArrayList<>();
 
@@ -71,12 +77,12 @@ public class MainActivity extends AppCompatActivity {
                 transactions.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Transaction per_transaction = postSnapshot.getValue(Transaction.class);
-                    total += per_transaction.getAmount();
-                    totalAmount.setText(total + "");
-                    transactions.add(per_transaction);
+                   total += per_transaction.getAmount();
+                   totalAmount.setText(total + "");
+                  transactions.add(per_transaction);
                 }
-                TransactionList transactionAdapter = new TransactionList(MainActivity.this ,transactions);
-                listViewTransactions.setAdapter(transactionAdapter);
+               TransactionList transactionAdapter = new TransactionList(MainActivity.this ,transactions);
+               listViewTransactions.setAdapter(transactionAdapter);
             }
 
             @Override
