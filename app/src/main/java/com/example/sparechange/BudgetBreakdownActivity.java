@@ -38,8 +38,8 @@ public class BudgetBreakdownActivity extends AppCompatActivity implements DatePi
     private TextView dateText;
     DatabaseReference databaseTransactions, databaseUser;
     List<Transaction> transactions;
-    float[] chartAmount;
-    String[] chartCategory;
+    List<Float> chartAmount = new ArrayList<>();
+    List<String> chartCategory = new ArrayList<>();
     float total, total2;
     String[] months = {"Jan", "Feb", "Mar"};
     int [] earnings = {500, 800, 2000};
@@ -82,7 +82,50 @@ public class BudgetBreakdownActivity extends AppCompatActivity implements DatePi
                     Transaction per_transaction = postSnapshot.getValue(Transaction.class);
                     transactions.add(per_transaction);
                 }
-            }
+                Log.d("transaction size: ", String.valueOf(transactions.size()));
+
+                    for(int i = 0; i < transactions.size(); i++){
+                        chartAmount.add(i, transactions.get(i).getAmount());
+                        chartCategory.add(i, transactions.get(i).getTransaction_category());
+                        Log.d("chartAmounts: ", String.valueOf(chartAmount.get(i)));
+                        Log.d("chartCategories: ", chartCategory.get(i));
+                    }
+
+                    List<PieEntry> chartValues = new ArrayList<>();
+                    for(int j = 0; j < transactions.size(); j++){
+                        if(transactions.get(j).getTransaction_type().equals("Expense"))
+                            chartValues.add(new PieEntry(chartAmount.get(j)*-1, chartCategory.get(j)));
+                        else
+                            chartValues.add(new PieEntry(chartAmount.get(j), chartCategory.get(j)));
+                    }
+
+                    PieDataSet dataSet = new PieDataSet(chartValues, "Transactions");
+                    dataSet.setSliceSpace(3f);
+                    dataSet.setSelectionShift(5f);
+                    dataSet.setColors(ColorTemplate.PASTEL_COLORS);
+
+                    PieData data = new PieData((dataSet));
+                    data.setValueTextSize(10f);
+                    data.setValueTextColor(Color.WHITE);
+
+
+                    pieChart.setData(data);
+                    pieChart.setUsePercentValues(false);
+                    pieChart.getDescription().setEnabled(false);
+                    pieChart.setExtraOffsets(5, 10, 5, 5);
+                    pieChart.setDragDecelerationFrictionCoef(0.95f);
+                    pieChart.setDrawHoleEnabled(true);
+                    pieChart.setHoleColor(Color.WHITE);
+                    pieChart.setTransparentCircleRadius(61f);
+                    pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
+
+
+                    Legend l = pieChart.getLegend(); // get legend of pie
+                    l.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER); // set vertical alignment for legend
+                    l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT); // set horizontal alignment for legend
+                    l.setOrientation(Legend.LegendOrientation.VERTICAL); // set orientation for legend
+                    l.setDrawInside(false); // set if legend should be drawn inside or not
+                }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -90,52 +133,6 @@ public class BudgetBreakdownActivity extends AppCompatActivity implements DatePi
             }
         });
 
-        for(int i = 0; i < transactions.size(); i++){
-            chartAmount[i] = transactions.get(i).getAmount();
-            chartCategory[i] = transactions.get(i).getTransaction_category();
-            Log.d("chart categories: ", "HELLO");
-        }
-
-        List<PieEntry> chartValues = new ArrayList<>();
-
-        /*
-        for(int i = 0; i < transactions.size(); i++){
-        chartValues.add(new PieEntry(chartAmount[i], chartCategory[i]));
-        /*chartValues.add(new PieEntry(21, "Philippines"));
-        chartValues.add(new PieEntry(25, "USA"));
-        chartValues.add(new PieEntry(43, "UK"));
-        chartValues.add(new PieEntry(13, "Nigeria"));
-        }*/
-
-        for(int i = 0; i < months.length; i++) {
-            chartValues.add(new PieEntry( earnings[i], months[i]));
-        }
-
-        PieDataSet dataSet = new PieDataSet(chartValues, "Countries");
-        dataSet.setSliceSpace(3f);
-        dataSet.setSelectionShift(5f);
-        dataSet.setColors(ColorTemplate.PASTEL_COLORS);
-
-        PieData data = new PieData((dataSet));
-        data.setValueTextSize(10f);
-        data.setValueTextColor(Color.YELLOW);
-
-        pieChart.setData(data);
-
-        pieChart.setUsePercentValues(true);
-        pieChart.getDescription().setEnabled(false);
-        pieChart.setExtraOffsets(5, 10, 5, 5);
-        pieChart.setDragDecelerationFrictionCoef(0.95f);
-        pieChart.setDrawHoleEnabled(true);
-        pieChart.setHoleColor(Color.WHITE);
-        pieChart.setTransparentCircleRadius(61f);
-        pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
-
-        Legend l = pieChart.getLegend(); // get legend of pie
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER); // set vertical alignment for legend
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT); // set horizontal alignment for legend
-        l.setOrientation(Legend.LegendOrientation.VERTICAL); // set orientation for legend
-        l.setDrawInside(false); // set if legend should be drawn inside or not
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.example.sparechange;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -83,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                TransactionList transactionAdapter = new TransactionList(MainActivity.this ,transactions);
                listViewTransactions.setAdapter(transactionAdapter);
+
             }
 
             @Override
