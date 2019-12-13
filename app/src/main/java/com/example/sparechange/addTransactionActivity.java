@@ -21,6 +21,8 @@ import com.example.sparechange.Model.Transaction;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -31,12 +33,12 @@ public class addTransactionActivity extends AppCompatActivity implements DatePic
     EditText tName, tAmount;
     List<Transaction> transactions;
     Button save;
-    Date currentTime = Calendar.getInstance().getTime();
+    Date transacDate;
     DatabaseReference databaseTransactions, databaseCategories;
     TextView tCategory, dateText;
     String type;
     private static final String TRANSACTION_NAME = "TRANSACTION_NAME", TRANSACTION_ID = "TRANSACTION_ID", TRANSACTION_AMOUNT = "TRANSACTION_AMOUNT";
-
+    final Format formatter = new SimpleDateFormat("MM/DD/YYYY");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,9 @@ public class addTransactionActivity extends AppCompatActivity implements DatePic
         dateText = findViewById(R.id.textViewDate);
 
         transactions = new ArrayList<>();
+
+
+
     }
     public void onClick(View v){
         Intent i = new Intent(getApplicationContext(),CategorySlider.class);
@@ -78,7 +83,7 @@ public class addTransactionActivity extends AppCompatActivity implements DatePic
             String id = databaseTransactions.push().getKey();
 
             if (type.equals("Expense")) {
-                Transaction transaction = new Transaction(id, name, type, category, amount, currentTime);
+                Transaction transaction = new Transaction(id, name, type, category, amount, transacDate);
                 databaseTransactions.child(id).setValue(transaction);
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.putExtra(TRANSACTION_NAME, name);
@@ -86,7 +91,7 @@ public class addTransactionActivity extends AppCompatActivity implements DatePic
                     intent.putExtra(TRANSACTION_AMOUNT, amount);
                     startActivity(intent);
             } else if (type.equals("Income")) {
-                Transaction transaction = new Transaction(id, name, type, category, amount2, currentTime);
+                Transaction transaction = new Transaction(id, name, type, category, amount2, transacDate);
                 databaseTransactions.child(id).setValue(transaction);
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.putExtra(TRANSACTION_NAME, name);
@@ -116,8 +121,26 @@ public class addTransactionActivity extends AppCompatActivity implements DatePic
                 Calendar.getInstance().get(Calendar.MONTH),
                 Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
         );
+        int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        int month = Calendar.getInstance().get(Calendar.MONTH);
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+
+        transacDate = getDateFromDatePicker(datePickerDialog.getDatePicker());
+        String formatDate = formatter.format(transacDate);
 
         datePickerDialog.show();
+    }
+
+    public static java.util.Date getDateFromDatePicker(DatePicker datePicker){
+        int day = datePicker.getDayOfMonth();
+        int month = datePicker.getMonth();
+        int year =  datePicker.getYear();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day);
+
+
+        return calendar.getTime();
     }
 
     @Override

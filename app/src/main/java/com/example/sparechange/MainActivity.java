@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                TransactionList transactionAdapter = new TransactionList(MainActivity.this ,transactions);
                listViewTransactions.setAdapter(transactionAdapter);
+
             }
 
             @Override
