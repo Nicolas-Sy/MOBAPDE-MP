@@ -2,7 +2,7 @@
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorWhite"
+    android:background="@color/colorGray"
     android:elevation="4dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:text="SpareChange"
         android:textColor="@color/colorPrimary"
-        android:fontFamily="@font/royalacid_o"
+        android:fontFamily="@font/royalacid"
         android:textSize="30dp"/>
 
 </androidx.appcompat.widget.Toolbar>

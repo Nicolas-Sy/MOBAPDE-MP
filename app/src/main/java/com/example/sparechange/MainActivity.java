@@ -26,6 +26,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final String TRANS_NAME = "TRANS_NAME";
+    public static final String TRANS_TYPE = "TRANS_TYPE";
+    public static final String TRANS_CATEG = "TRANS_CATEG";
+    public static final String TRANS_AMOUNT = "TRANS_AMOUNT";
+    public static final String TRANS_DATE = "TRANS_DATE";
+
+
     DatabaseReference databaseTransactions, databaseUser;
     List<Transaction> transactions;
     ListView listViewTransactions;
@@ -33,10 +41,6 @@ public class MainActivity extends AppCompatActivity {
     Button addTransacBtn;
     float total, total2;
 
-    //EXAMPLE
-//    String[] fruitname={"Mango", "Banana"};
-//    String[] desc={"This is Mango", "This is Banana"};
-//    Integer[] imgid={R.drawable.ic_arrow_back, R.drawable.siomaichaofan};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,17 +57,26 @@ public class MainActivity extends AppCompatActivity {
         listViewTransactions = findViewById(R.id.listViewPosts);
         totalAmount = findViewById(R.id.textViewBalance);
 
+        //For Date - final Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         transactions = new ArrayList<>();
-
 
         listViewTransactions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
                 Transaction transaction = transactions.get(i);
+               //For Date - String timestamp_string = formatter.format(transaction.getTransaction_date());
+
+                Intent intent = new Intent(getApplicationContext(), PerTransactionActivity.class);
+                intent.putExtra(TRANS_NAME, transaction.getTransaction_name());
+                intent.putExtra(TRANS_TYPE, transaction.getTransaction_type());
+                intent.putExtra(TRANS_CATEG, transaction.getTransaction_category());
+                intent.putExtra(TRANS_AMOUNT, transaction.getAmount());
+                startActivity(intent);
 
             }
         });
+
 
     }
 
