@@ -159,7 +159,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textColor="@color/colorPrimaryDark"
-                        android:background="@drawable/element_outline"
+                        android:background="@drawable/button_background"
                         android:text="Claim Rewards"/>
 
                 </LinearLayout>

@@ -32,8 +32,7 @@
         android:layout_marginStart="264dp"
         android:layout_marginLeft="264dp"
         android:layout_marginTop="580dp"
-        android:textColor="@color/colorWhite"
-        android:background="@drawable/ripple_effect"
+        android:background="@drawable/button_background"
         android:onClick="Back"
         android:text="Back" />
 
@@ -47,10 +46,9 @@
         android:layout_marginStart="147dp"
         android:layout_marginLeft="147dp"
         android:layout_marginTop="295dp"
-        android:background="@drawable/ripple_effect"
+        android:background="@drawable/button_background"
         android:onClick="Date"
-        android:text="Choose Date"
-        android:textColor="@color/colorWhite" />
+        android:text="Choose Date" />
 
     <TextView
         android:id="@+id/textViewDate"
@@ -138,10 +136,9 @@
         android:layout_marginStart="76dp"
         android:layout_marginLeft="76dp"
         android:layout_marginTop="580dp"
-        android:background="@drawable/ripple_effect"
+        android:background="@drawable/button_background"
         android:onClick="createTransaction"
-        android:text="Post"
-        android:textColor="@color/colorWhite" />
+        android:text="Post" />
 
     <Button
         android:id="@+id/button2"
@@ -153,10 +150,9 @@
         android:layout_marginStart="78dp"
         android:layout_marginLeft="78dp"
         android:layout_marginTop="641dp"
-        android:background="@drawable/ripple_effect"
+        android:background="@drawable/button_background"
         android:onClick="budgetBreakdown"
-        android:text="Budget Breakdown"
-        android:textColor="@color/colorWhite" />
+        android:text="Budget Breakdown" />
 
 
 </RelativeLayout>

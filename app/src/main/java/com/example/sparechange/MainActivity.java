@@ -13,9 +13,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.Navigation;
 
 import com.example.sparechange.Model.Transaction;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,7 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     public static final String TRANS_NAME = "TRANS_NAME";
     public static final String TRANS_TYPE = "TRANS_TYPE";
@@ -33,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String TRANS_AMOUNT = "TRANS_AMOUNT";
     public static final String TRANS_DATE = "TRANS_DATE";
 
-
+    private DrawerLayout drawer;
     DatabaseReference databaseTransactions, databaseUser;
     List<Transaction> transactions;
     ListView listViewTransactions;
@@ -58,6 +64,16 @@ public class MainActivity extends AppCompatActivity {
         totalAmount = findViewById(R.id.textViewBalance);
 
         //For Date - final Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+
+        drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer,toolbar,
+                                        R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggle.syncState();
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         transactions = new ArrayList<>();
 
@@ -78,6 +94,32 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch(menuItem.getItemId()) {
+            case R.id.nav_profile:
+                Intent profile_intent = new Intent(getApplicationContext(), UserProfileActivity.class);
+                startActivity(profile_intent);
+                break;
+
+            case R.id.nav_budget:
+                Intent budget_intent = new Intent(getApplicationContext(), BudgetBreakdownActivity.class);
+                startActivity(budget_intent);
+                break;
+
+        }
+        return true;
     }
 
     @Override
@@ -128,14 +170,6 @@ public class MainActivity extends AppCompatActivity {
 
         });
 */
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.example_menu, menu);
-        return true;
 
     }
 
