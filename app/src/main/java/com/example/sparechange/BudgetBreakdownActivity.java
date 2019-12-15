@@ -40,9 +40,12 @@ public class BudgetBreakdownActivity extends AppCompatActivity implements DatePi
     List<Transaction> transactions;
     List<Float> chartAmount = new ArrayList<>();
     List<String> chartCategory = new ArrayList<>();
+    List<String> newchartCategory = new ArrayList<>();
+    List<String> newchartAmount = new ArrayList<>();
     float total, total2;
     String[] months = {"Jan", "Feb", "Mar"};
     int [] earnings = {500, 800, 2000};
+    boolean isIncome = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,49 +87,8 @@ public class BudgetBreakdownActivity extends AppCompatActivity implements DatePi
                 }
                 Log.d("transaction size: ", String.valueOf(transactions.size()));
 
-                    for(int i = 0; i < transactions.size(); i++){
-                        chartAmount.add(i, transactions.get(i).getAmount());
-                        chartCategory.add(i, transactions.get(i).getTransaction_category());
-                        Log.d("chartAmounts: ", String.valueOf(chartAmount.get(i)));
-                        Log.d("chartCategories: ", chartCategory.get(i));
-                    }
-
-                    List<PieEntry> chartValues = new ArrayList<>();
-                    for(int j = 0; j < transactions.size(); j++){
-                        if(transactions.get(j).getTransaction_type().equals("Expense"))
-                            chartValues.add(new PieEntry(chartAmount.get(j)*-1, chartCategory.get(j)));
-                        else
-                            chartValues.add(new PieEntry(chartAmount.get(j), chartCategory.get(j)));
-                    }
-
-                    PieDataSet dataSet = new PieDataSet(chartValues, "Transactions");
-                    dataSet.setSliceSpace(3f);
-                    dataSet.setSelectionShift(5f);
-                    dataSet.setColors(ColorTemplate.PASTEL_COLORS);
-
-                    PieData data = new PieData((dataSet));
-                    data.setValueTextSize(10f);
-                    data.setValueTextColor(Color.WHITE);
-
-
-                    pieChart.setData(data);
-                    pieChart.setUsePercentValues(false);
-                    pieChart.getDescription().setEnabled(false);
-                    pieChart.setExtraOffsets(5, 10, 5, 5);
-                    pieChart.setDragDecelerationFrictionCoef(0.95f);
-                    pieChart.setDrawHoleEnabled(true);
-                    pieChart.setHoleColor(Color.WHITE);
-                    pieChart.setTransparentCircleRadius(61f);
-                    pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
-
-
-                    Legend l = pieChart.getLegend(); // get legend of pie
-                    l.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER); // set vertical alignment for legend
-                    l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT); // set horizontal alignment for legend
-                    l.setOrientation(Legend.LegendOrientation.VERTICAL); // set orientation for legend
-                    l.setDrawInside(false); // set if legend should be drawn inside or not
+                createExpenseChart();
                 }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -135,12 +97,115 @@ public class BudgetBreakdownActivity extends AppCompatActivity implements DatePi
 
     }
 
+    public void createExpenseChart(){
+        for(int i = 0; i < transactions.size(); i++){
+            chartAmount.add(i, transactions.get(i).getAmount());
+            chartCategory.add(i, transactions.get(i).getTransaction_category());
+        }
+
+        for(int k = 0; k < chartCategory.size(); k++){
+            for(int l = k +1; l < chartCategory.size(); l++){
+                if(chartCategory.get(k).equals(chartCategory.get(l))) {
+                    chartAmount.set(k, Float.valueOf(chartAmount.get(k)+ chartAmount.get(l)));
+                    chartCategory.remove(l);
+                    chartAmount.remove(l);
+                }
+            }
+        }
+
+        List<PieEntry> chartValues = new ArrayList<>();
+        for(int j = 0; j < chartAmount.size(); j++){
+            if(transactions.get(j).getTransaction_type().equals("Expense"))
+                chartValues.add(new PieEntry(chartAmount.get(j)*-1, chartCategory.get(j)));
+//                        else
+//                            chartValues.add(new PieEntry(chartAmount.get(j), chartCategory.get(j)));
+        }
+
+        PieDataSet dataSet = new PieDataSet(chartValues, "Transactions");
+        dataSet.setSliceSpace(3f);
+        dataSet.setSelectionShift(5f);
+        dataSet.setColors(ColorTemplate.PASTEL_COLORS);
+
+        PieData data = new PieData((dataSet));
+        data.setValueTextSize(10f);
+        data.setValueTextColor(Color.WHITE);
+
+
+        pieChart.setData(data);
+        pieChart.setUsePercentValues(false);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.setExtraOffsets(5, 10, 5, 5);
+        pieChart.setDragDecelerationFrictionCoef(0.95f);
+        pieChart.setDrawHoleEnabled(true);
+        pieChart.setHoleColor(Color.WHITE);
+        pieChart.setTransparentCircleRadius(61f);
+        pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
+    }
+
+    public void createIncomeChart(){
+        for(int i = 0; i < transactions.size(); i++){
+            chartAmount.add(i, transactions.get(i).getAmount());
+            chartCategory.add(i, transactions.get(i).getTransaction_category());
+        }
+
+        for(int k = 0; k < chartCategory.size(); k++){
+            for(int l = k +1; l < chartCategory.size(); l++){
+                if(chartCategory.get(k).equals(chartCategory.get(l))) {
+                    chartAmount.set(k, Float.valueOf(chartAmount.get(k)+ chartAmount.get(l)));
+                    chartCategory.remove(l);
+                    chartAmount.remove(l);
+                }
+            }
+        }
+
+        List<PieEntry> chartValues = new ArrayList<>();
+        for(int j = 0; j < chartAmount.size(); j++){
+            if(transactions.get(j).getTransaction_type().equals("Income"))
+                chartValues.add(new PieEntry(chartAmount.get(j), chartCategory.get(j)));
+//                        else
+//                            chartValues.add(new PieEntry(chartAmount.get(j), chartCategory.get(j)));
+        }
+
+        PieDataSet dataSet = new PieDataSet(chartValues, "Transactions");
+        dataSet.setSliceSpace(3f);
+        dataSet.setSelectionShift(5f);
+        dataSet.setColors(ColorTemplate.PASTEL_COLORS);
+
+        PieData data = new PieData((dataSet));
+        data.setValueTextSize(10f);
+        data.setValueTextColor(Color.WHITE);
+
+
+        pieChart.setData(data);
+        pieChart.setUsePercentValues(false);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.setExtraOffsets(5, 10, 5, 5);
+        pieChart.setDragDecelerationFrictionCoef(0.95f);
+        pieChart.setDrawHoleEnabled(true);
+        pieChart.setHoleColor(Color.WHITE);
+        pieChart.setTransparentCircleRadius(61f);
+        pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
+    }
+
+
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         String date = "Month/Day/Year: " + (month + 1) + "/" + dayOfMonth + "/" + year;
         dateText.setText(date);
     }
 
+    public void Switch(View v){
+        if(isIncome == false){
+            createIncomeChart();
+            isIncome = true;
+        }
+        else{
+            createExpenseChart();
+            isIncome = false;
+        }
+
+
+    }
     public void Back(View v) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

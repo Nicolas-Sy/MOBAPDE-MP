@@ -20,9 +20,22 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="300dp"
         android:layout_marginLeft="300dp"
-        android:layout_marginTop="680dp"
+        android:layout_marginTop="660dp"
         android:onClick="Back"
         android:text="Back" />
+
+    <Button
+        android:id="@+id/buttonSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="150dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="660dp"
+        android:onClick="Switch"
+        android:text="Switch" />
 
     <Button
         android:id="@+id/buttonDate"
@@ -36,6 +49,18 @@
         android:layout_marginTop="80dp"
         android:onClick="Date"
         android:text="Choose Date" />
+
+<!--    <Spinner-->
+<!--        android:id="@+id/spinnerTransaction"-->
+<!--        android:layout_width="fill_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:layout_marginLeft="20dp"-->
+<!--        android:layout_marginTop="80dp"-->
+<!--        android:onClick="Date" />-->
 
     <TextView
         android:id="@+id/textViewDate"
