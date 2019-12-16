@@ -4,24 +4,27 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/piggy"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/piggy"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Register"></activity>
+        <activity android:name=".Login" />
         <activity
             android:name=".CategorySlider"
             android:label="@string/title_activity_category_slider"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".BudgetBreakdownActivity" />
         <activity android:name=".PerTransactionActivity" />
         <activity android:name=".UserProfileActivity" />
         <activity android:name=".addTransactionActivity" />
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
