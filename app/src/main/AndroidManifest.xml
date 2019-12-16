@@ -11,18 +11,14 @@
         android:roundIcon="@drawable/piggy"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".editTransactionActivity"></activity>
-
-        <activity android:name=".Register"></activity>
-
+        <activity android:name=".editTransactionActivity" />
+        <activity android:name=".Register" />
         <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".CategorySlider"
@@ -34,9 +30,7 @@
         <activity android:name=".addTransactionActivity" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
