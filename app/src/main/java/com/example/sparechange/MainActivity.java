@@ -1,7 +1,9 @@
 package com.example.sparechange;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,10 +29,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
-
+    String TAG = "MainActivity";
     public static final String TRANS_ID = "TRANS_ID";
     public static final String TRANS_NAME = "TRANS_NAME";
     public static final String TRANS_TYPE = "TRANS_TYPE";
@@ -45,7 +48,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView textViewIncome, textViewExpenses, totalAmount;
     Button addTransacBtn;
     float total, totalIncome, totalExpense;
-
+    TextView yearMonth;
+    int choosenYear = 2017;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +118,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent budget_intent = new Intent(getApplicationContext(), BudgetBreakdownActivity.class);
                 startActivity(budget_intent);
                 break;
-
+            case R.id.nav_rewards:
+                Intent rewards_intent = new Intent(getApplicationContext(), RewardsActivity.class);
+                startActivity(rewards_intent);
+                break;
             case R.id.nav_logout:
                 FirebaseAuth.getInstance().signOut();
                 Intent logout_intent = new Intent(getApplicationContext(), Login.class);
@@ -224,4 +231,81 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return total;
     }
 
+//    private void setNormalPicker() {
+//        setContentView(R.layout.activity_calendar_test);
+//        final Calendar today = Calendar.getInstance();
+//
+//        findViewById(R.id.month_picker).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                MonthPickerDialog.Builder builder = new MonthPickerDialog.Builder(MainActivity.this, new MonthPickerDialog.OnDateSetListener() {
+//                    @Override
+//                    public void onDateSet(int selectedMonth, int selectedYear) {
+//                        Log.d(TAG, "selectedMonth : " + selectedMonth + " selectedYear : " + selectedYear);
+//                        Toast.makeText(MainActivity.this, "Date set with month" + selectedMonth + " year " + selectedYear, Toast.LENGTH_SHORT).show();
+//                    }
+//                }, today.get(Calendar.YEAR), today.get(Calendar.MONTH));
+//
+//                builder.setActivatedMonth(Calendar.JULY)
+//                        .setMinYear(1990)
+//                        .setActivatedYear(2017)
+//                        .setMaxYear(2030)
+//                        .setMinMonth(Calendar.FEBRUARY)
+//                        .setTitle("Select trading month")
+//                        .setMonthRange(Calendar.FEBRUARY, Calendar.NOVEMBER)
+//                        // .setMaxMonth(Calendar.OCTOBER)
+//                        // .setYearRange(1890, 1890)
+//                        // .setMonthAndYearRange(Calendar.FEBRUARY, Calendar.OCTOBER, 1890, 1890)
+//                        .showMonthOnly()
+//                        // .showYearOnly()
+//                        .setOnMonthChangedListener(new MonthPickerDialog.OnMonthChangedListener() {
+//                            @Override
+//                            public void onMonthChanged(int selectedMonth) {
+//                                Log.d(TAG, "Selected month : " + selectedMonth);
+//                                // Toast.makeText(MainActivity.this, " Selected month : " + selectedMonth, Toast.LENGTH_SHORT).show();
+//                            }
+//                        })
+//                        .setOnYearChangedListener(new MonthPickerDialog.OnYearChangedListener() {
+//                            @Override
+//                            public void onYearChanged(int selectedYear) {
+//                                Log.d(TAG, "Selected year : " + selectedYear);
+//                                // Toast.makeText(MainActivity.this, " Selected year : " + selectedYear, Toast.LENGTH_SHORT).show();
+//                            }
+//                        })
+//                        .build()
+//                        .show();
+//
+//            }
+//        });
+//
+//        findViewById(R.id.date_picker).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Calendar cal = Calendar.getInstance();
+//                DatePickerDialog dialog = new DatePickerDialog(MainActivity.this, null, 2017,
+//                        cal.get(Calendar.MONTH), cal.get(Calendar.DATE));
+//                dialog.show();
+//            }
+//        });
+//
+//        final TextView year = (TextView) findViewById(R.id.year);
+//        findViewById(R.id.choose_year).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                MonthPickerDialog.Builder builder = new MonthPickerDialog.Builder(MainActivity.this, new MonthPickerDialog.OnDateSetListener() {
+//                    @Override
+//                    public void onDateSet(int selectedMonth, int selectedYear) {
+//                        year.setText(Integer.toString(selectedYear));
+//                        choosenYear = selectedYear;
+//                    }
+//                }, choosenYear, 0);
+//
+//                builder.showYearOnly()
+//                        .setYearRange(1990, 2030)
+//                        .build()
+//                        .show();
+//            }
+//        });
+//
+//    }
 }
