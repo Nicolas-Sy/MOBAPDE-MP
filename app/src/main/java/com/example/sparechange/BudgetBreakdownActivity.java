@@ -134,8 +134,9 @@ public class BudgetBreakdownActivity extends AppCompatActivity implements DatePi
         dataSet.setSelectionShift(5f);
         dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
 
+
         PieData data = new PieData((dataSet));
-        data.setValueTextSize(10f);
+        data.setValueTextSize(14f);
         data.setValueTextColor(Color.WHITE);
 
 
@@ -148,6 +149,7 @@ public class BudgetBreakdownActivity extends AppCompatActivity implements DatePi
         pieChart.setHoleColor(Color.WHITE);
         pieChart.setTransparentCircleRadius(61f);
         pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
+
     }
 
     public void createExpenseChart(){
@@ -173,7 +175,7 @@ public class BudgetBreakdownActivity extends AppCompatActivity implements DatePi
         dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
 
         PieData data = new PieData((dataSet));
-        data.setValueTextSize(10f);
+        data.setValueTextSize(14f);
         data.setValueTextColor(Color.WHITE);
 
 
