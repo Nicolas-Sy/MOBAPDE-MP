@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "858981283814-7d0omr5qm6mcedot8qijus37krmd6hh3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sparechange",
+            "certificate_hash": "4832d9a865cca55a881dc61d16b23dc7b134c430"
+          }
+        },
+        {
           "client_id": "858981283814-9s3nttev2t1kusojaobmv56rijeavpgq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
