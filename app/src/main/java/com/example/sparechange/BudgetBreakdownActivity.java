@@ -24,6 +24,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -82,13 +83,17 @@ public class BudgetBreakdownActivity extends AppCompatActivity implements DatePi
     protected void onStart() {
         super.onStart();
 
+        final String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
         databaseTransactions.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 transactions.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Transaction per_transaction = postSnapshot.getValue(Transaction.class);
-                    transactions.add(per_transaction);
+                    if(per_transaction.getUserID().equals(userID)){
+                        transactions.add(per_transaction);
+                    }
                 }
                 Log.d("transaction size: ", String.valueOf(transactions.size()));
 

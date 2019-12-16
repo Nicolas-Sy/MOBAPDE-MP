@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sparechange.Model.Transaction;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -34,8 +35,11 @@ public class addTransactionActivity extends AppCompatActivity implements DatePic
     DatabaseReference databaseTransactions, databaseCategories;
     TextView tCategory, dateText;
     String type;
+    String userID;
+
     private static final String TRANSACTION_NAME = "TRANSACTION_NAME", TRANSACTION_ID = "TRANSACTION_ID", TRANSACTION_AMOUNT = "TRANSACTION_AMOUNT";
     final Format formatter = new SimpleDateFormat("MM/DD/YYYY");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,19 +53,18 @@ public class addTransactionActivity extends AppCompatActivity implements DatePic
         transactions = new ArrayList<>();
 
 
-
     }
-    public void onClick(View v){
-        Intent i = new Intent(getApplicationContext(),CategorySlider.class);
+
+    public void onClick(View v) {
+        Intent i = new Intent(getApplicationContext(), CategorySlider.class);
         startActivityForResult(i, 1);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1 ){
-            if(resultCode == 1)
-            {
+        if (requestCode == 1) {
+            if (resultCode == 1) {
                 tCategory.setText(data.getStringExtra("CATEGORY"));
                 type = data.getStringExtra("TYPE");
             }
@@ -75,26 +78,27 @@ public class addTransactionActivity extends AppCompatActivity implements DatePic
         String category = tCategory.getText().toString();
         float amount = Float.parseFloat(tAmount.getText().toString()) * -1;
         float amount2 = Float.parseFloat(tAmount.getText().toString());
+        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         if (!(TextUtils.isEmpty(name) && TextUtils.isEmpty(type))) {
             String id = databaseTransactions.push().getKey();
 
             if (type.equals("Expense")) {
-                Transaction transaction = new Transaction(id, name, type, category, amount, transacDate);
+                Transaction transaction = new Transaction(id, name, type, category, amount, transacDate, userID);
                 databaseTransactions.child(id).setValue(transaction);
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.putExtra(TRANSACTION_NAME, name);
-                    intent.putExtra(TRANSACTION_ID, id);
-                    intent.putExtra(TRANSACTION_AMOUNT, amount);
-                    startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra(TRANSACTION_NAME, name);
+                intent.putExtra(TRANSACTION_ID, id);
+                intent.putExtra(TRANSACTION_AMOUNT, amount);
+                startActivity(intent);
             } else if (type.equals("Income")) {
-                Transaction transaction = new Transaction(id, name, type, category, amount2, transacDate);
+                Transaction transaction = new Transaction(id, name, type, category, amount2, transacDate, userID);
                 databaseTransactions.child(id).setValue(transaction);
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.putExtra(TRANSACTION_NAME, name);
-                    intent.putExtra(TRANSACTION_ID, id);
-                    intent.putExtra(TRANSACTION_AMOUNT, amount2);
-                    startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra(TRANSACTION_NAME, name);
+                intent.putExtra(TRANSACTION_ID, id);
+                intent.putExtra(TRANSACTION_AMOUNT, amount2);
+                startActivity(intent);
             }
 
             tName.setText("");
@@ -110,7 +114,7 @@ public class addTransactionActivity extends AppCompatActivity implements DatePic
 
     }
 
-    public void Date(View v){
+    public void Date(View v) {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 this,
                 this,
@@ -128,10 +132,10 @@ public class addTransactionActivity extends AppCompatActivity implements DatePic
         datePickerDialog.show();
     }
 
-    public static java.util.Date getDateFromDatePicker(DatePicker datePicker){
+    public static java.util.Date getDateFromDatePicker(DatePicker datePicker) {
         int day = datePicker.getDayOfMonth();
         int month = datePicker.getMonth();
-        int year =  datePicker.getYear();
+        int year = datePicker.getYear();
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day);
@@ -142,19 +146,19 @@ public class addTransactionActivity extends AppCompatActivity implements DatePic
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        String date = "Month/Day/Year: " + (month+1) + "/" + dayOfMonth + "/" + year;
+        String date = "Month/Day/Year: " + (month + 1) + "/" + dayOfMonth + "/" + year;
         dateText.setText(date);
     }
 
-    public void Back(View v){
-        Intent intent = new Intent(this,MainActivity.class);
+    public void Back(View v) {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }
 
-    public void budgetBreakdown(View v){
-        Intent intent = new Intent(this,BudgetBreakdownActivity.class);
+    public void budgetBreakdown(View v) {
+        Intent intent = new Intent(this, BudgetBreakdownActivity.class);
         startActivity(intent);
         finish();
     }
-    }
+}

@@ -19,6 +19,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.sparechange.Model.Transaction;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -114,6 +115,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(budget_intent);
                 break;
 
+            case R.id.nav_logout:
+                FirebaseAuth.getInstance().signOut();
+                Intent logout_intent = new Intent(getApplicationContext(), Login.class);
+                startActivity(logout_intent);
+                finish();
         }
         return true;
     }
@@ -121,6 +127,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onStart() {
         super.onStart();
+
+        final String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
         databaseTransactions.addValueEventListener(new ValueEventListener() {
             int z = 0;
             @Override
@@ -129,12 +138,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Transaction per_transaction = postSnapshot.getValue(Transaction.class);
 
-                    if(per_transaction.getAmount() > 0){
-                        totalIncome += per_transaction.getAmount();
+                    if(per_transaction.getUserID().equals(userID)){
+                        transactions.add(per_transaction);
+                        if(per_transaction.getAmount() > 0){
+                            totalIncome += per_transaction.getAmount();
+                        }
+                        else if(per_transaction.getAmount() < 0){
+                            totalExpense += per_transaction.getAmount();
+                        }
                     }
-                    else if(per_transaction.getAmount() < 0){
-                        totalExpense += per_transaction.getAmount();
-                    }
+
 
                     total = totalIncome + totalExpense;
 
@@ -142,7 +155,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     textViewExpenses.setText(Float.toString(totalExpense));
                     totalAmount.setText(Float.toString(total));
 
-                    transactions.add(per_transaction);
                 }
 
                TransactionList transactionAdapter = new TransactionList(MainActivity.this ,transactions);
