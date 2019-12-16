@@ -10,7 +10,8 @@ public class Transaction {
     private float amount;
     private Date transaction_date;
 
-    public Transaction(){
+    public Transaction()
+    {
 
     }
 

@@ -9,7 +9,8 @@
         android:roundIcon="@drawable/piggy"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Register"></activity>
+        <activity android:name=".editTransactionActivity"></activity>
+        <activity android:name=".Register" />
         <activity android:name=".Login" />
         <activity
             android:name=".CategorySlider"

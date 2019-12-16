@@ -2,8 +2,6 @@ package com.example.sparechange;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.navigation.Navigation;
 
 import com.example.sparechange.Model.Transaction;
 import com.google.android.material.navigation.NavigationView;
@@ -33,6 +30,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
+    public static final String TRANS_ID = "TRANS_ID";
     public static final String TRANS_NAME = "TRANS_NAME";
     public static final String TRANS_TYPE = "TRANS_TYPE";
     public static final String TRANS_CATEG = "TRANS_CATEG";
@@ -84,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                //For Date - String timestamp_string = formatter.format(transaction.getTransaction_date());
 
                 Intent intent = new Intent(getApplicationContext(), PerTransactionActivity.class);
+                intent.putExtra(TRANS_ID, transaction.getId());
                 intent.putExtra(TRANS_NAME, transaction.getTransaction_name());
                 intent.putExtra(TRANS_TYPE, transaction.getTransaction_type());
                 intent.putExtra(TRANS_CATEG, transaction.getTransaction_category());
