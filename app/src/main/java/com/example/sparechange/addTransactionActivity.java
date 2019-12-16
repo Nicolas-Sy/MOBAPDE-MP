@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sparechange.Model.Transaction;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -37,6 +38,7 @@ public class addTransactionActivity extends AppCompatActivity implements DatePic
     DatabaseReference databaseTransactions, databaseCategories;
     TextView tCategory, dateText;
     String type;
+    String userID;
     private static final String TRANSACTION_NAME = "TRANSACTION_NAME", TRANSACTION_ID = "TRANSACTION_ID", TRANSACTION_AMOUNT = "TRANSACTION_AMOUNT";
     final Format formatter = new SimpleDateFormat("MM/DD/YYYY");
     @Override
@@ -78,12 +80,13 @@ public class addTransactionActivity extends AppCompatActivity implements DatePic
         String category = tCategory.getText().toString();
         float amount = Float.parseFloat(tAmount.getText().toString()) * -1;
         float amount2 = Float.parseFloat(tAmount.getText().toString());
+        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         if (!(TextUtils.isEmpty(name) && TextUtils.isEmpty(type))) {
             String id = databaseTransactions.push().getKey();
 
             if (type.equals("Expense")) {
-                Transaction transaction = new Transaction(id, name, type, category, amount, transacDate);
+                Transaction transaction = new Transaction(id, name, type, category, amount, transacDate, userID);
                 databaseTransactions.child(id).setValue(transaction);
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.putExtra(TRANSACTION_NAME, name);
@@ -91,7 +94,7 @@ public class addTransactionActivity extends AppCompatActivity implements DatePic
                     intent.putExtra(TRANSACTION_AMOUNT, amount);
                     startActivity(intent);
             } else if (type.equals("Income")) {
-                Transaction transaction = new Transaction(id, name, type, category, amount2, transacDate);
+                Transaction transaction = new Transaction(id, name, type, category, amount2, transacDate, userID);
                 databaseTransactions.child(id).setValue(transaction);
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.putExtra(TRANSACTION_NAME, name);
