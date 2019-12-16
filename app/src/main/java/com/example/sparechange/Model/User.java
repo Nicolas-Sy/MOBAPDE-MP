@@ -5,15 +5,17 @@ public class User {
     private String fullname;
     private String email;
     private String password;
+    private int spareCoins;
     private float balance;
 
     public User(){
 
     }
 
-    public User(String id, float balance){
+    public User(String id, float balance, int spareCoins){
         this.id = id;
         this.balance = balance;
+        this.spareCoins = spareCoins;
     }
 
     public User(String id, String fullname, String email, String password){
@@ -23,6 +25,13 @@ public class User {
         this.password = password;
     }
 
+    public int getSpareCoins() {
+        return spareCoins;
+    }
+
+    public void setSpareCoins(int spareCoins) {
+        this.spareCoins = spareCoins;
+    }
     public String getId() {
         return id;
     }

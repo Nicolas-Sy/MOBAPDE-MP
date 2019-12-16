@@ -41,9 +41,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DatabaseReference databaseTransactions, databaseUser;
     List<Transaction> transactions;
     ListView listViewTransactions;
-    TextView totalAmount;
+    TextView textViewIncome, textViewExpenses, totalAmount;
     Button addTransacBtn;
-    float total, total2;
+    float total, totalIncome, totalExpense;
 
 
     @Override
@@ -53,13 +53,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         databaseTransactions = FirebaseDatabase.getInstance().getReference("transactions");
         databaseUser = FirebaseDatabase.getInstance().getReference("users");
 
-        totalAmount = findViewById(R.id.totalAmount);
-        listViewTransactions = (ListView) findViewById(R.id.listViewPosts);
-        addTransacBtn = findViewById(R.id.addTransacBtn);
-
         addTransacBtn = findViewById(R.id.addTransacBtn);
         listViewTransactions = findViewById(R.id.listViewPosts);
         totalAmount = findViewById(R.id.textViewBalance);
+        textViewIncome = findViewById(R.id.textViewIncome);
+        textViewExpenses = findViewById(R.id.textViewExpenses);
 
         //For Date - final Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -88,7 +86,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 intent.putExtra(TRANS_CATEG, transaction.getTransaction_category());
                 intent.putExtra(TRANS_AMOUNT, transaction.getAmount());
                 startActivity(intent);
-
             }
         });
 
@@ -131,10 +128,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 transactions.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Transaction per_transaction = postSnapshot.getValue(Transaction.class);
-                   total += per_transaction.getAmount();
-                   totalAmount.setText(total + "");
-                  transactions.add(per_transaction);
+
+                    if(per_transaction.getAmount() > 0){
+                        totalIncome += per_transaction.getAmount();
+                    }
+                    else if(per_transaction.getAmount() < 0){
+                        totalExpense += per_transaction.getAmount();
+                    }
+
+                    total = totalIncome + totalExpense;
+
+                    textViewIncome.setText(Float.toString(totalIncome));
+                    textViewExpenses.setText(Float.toString(totalExpense));
+                    totalAmount.setText(Float.toString(total));
+
+                    transactions.add(per_transaction);
                 }
+
                TransactionList transactionAdapter = new TransactionList(MainActivity.this ,transactions);
                listViewTransactions.setAdapter(transactionAdapter);
 

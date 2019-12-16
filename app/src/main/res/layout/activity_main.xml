@@ -24,6 +24,7 @@
                 android:layout_below="@id/toolbar"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"
                 >
 
                 <LinearLayout
@@ -71,6 +72,7 @@
                             android:textSize="16sp" />
 
                         <TextView
+                            android:id="@+id/textViewExpenses"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
@@ -111,7 +113,7 @@
                 android:layout_width="372dp"
                 android:layout_height="396dp"
                 android:layout_below="@id/cardView"
-                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="22dp"
                 android:layout_marginTop="20dp" />

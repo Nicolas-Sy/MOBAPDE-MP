@@ -33,12 +33,14 @@ import java.util.List;
 
             TextView textViewName = (TextView) listViewItem.findViewById(R.id.textViewTitle);
             TextView textViewCategory = (TextView) listViewItem.findViewById(R.id.textViewCategory);
+            TextView textViewAmount = (TextView) listViewItem.findViewById(R.id.amount);
             TextView textViewDate = (TextView) listViewItem.findViewById(R.id.textViewDate);
 
             Transaction transaction = transactions.get(position);
 
             textViewName.setText(transaction.getTransaction_name());
             textViewCategory.setText(transaction.getTransaction_category());
+            textViewAmount.setText(Float.toString(transaction.getAmount()));
             return listViewItem;
         }
 
