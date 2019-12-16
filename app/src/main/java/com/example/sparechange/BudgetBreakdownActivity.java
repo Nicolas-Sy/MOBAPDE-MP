@@ -8,7 +8,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,7 +34,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class BudgetBreakdownActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class BudgetBreakdownActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, AdapterView.OnItemSelectedListener {
 
     PieChart pieChart;
     private TextView dateText;
@@ -46,6 +48,7 @@ public class BudgetBreakdownActivity extends AppCompatActivity implements DatePi
     String[] months = {"Jan", "Feb", "Mar"};
     int [] earnings = {500, 800, 2000};
     int switchMode = 1;
+    String transactionType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,8 @@ public class BudgetBreakdownActivity extends AppCompatActivity implements DatePi
 
         pieChart = (PieChart) findViewById(R.id.pieChart);
         dateText = (TextView) findViewById(R.id.textViewDate);
+        Spinner spinnerTransactionType = findViewById(R.id.spinnerTransactionType);
+        spinnerTransactionType.setOnItemSelectedListener(this);
 
         databaseTransactions = FirebaseDatabase.getInstance().getReference("transactions");
         databaseUser = FirebaseDatabase.getInstance().getReference("users");
@@ -87,7 +92,12 @@ public class BudgetBreakdownActivity extends AppCompatActivity implements DatePi
                 }
                 Log.d("transaction size: ", String.valueOf(transactions.size()));
 
-                createInitialExpenseChart();
+                for(int i = 0; i < transactions.size(); i++){
+                    chartAmount.add(i, transactions.get(i).getAmount());
+                    chartCategory.add(i, transactions.get(i).getTransaction_category());
+                }
+
+                createExpenseChart();
                 }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -95,87 +105,6 @@ public class BudgetBreakdownActivity extends AppCompatActivity implements DatePi
             }
         });
 
-    }
-
-    public void createInitialExpenseChart(){
-        for(int i = 0; i < transactions.size(); i++){
-            chartAmount.add(i, transactions.get(i).getAmount());
-            chartCategory.add(i, transactions.get(i).getTransaction_category());
-        }
-
-        for(int k = 0; k < chartCategory.size(); k++){
-            for(int l = k +1; l < chartCategory.size(); l++){
-                if(chartCategory.get(k).equals(chartCategory.get(l))) {
-                    chartAmount.set(k, Float.valueOf(chartAmount.get(k)+ chartAmount.get(l)));
-                    chartCategory.remove(l);
-                    chartAmount.remove(l);
-                }
-            }
-        }
-
-        List<PieEntry> chartValues = new ArrayList<>();
-        for(int j = 0; j < chartAmount.size(); j++){
-            if(transactions.get(j).getTransaction_type().equals("Expense"))
-                chartValues.add(new PieEntry(chartAmount.get(j)*-1, chartCategory.get(j)));
-        }
-
-        PieDataSet dataSet = new PieDataSet(chartValues, "Transactions");
-        dataSet.setSliceSpace(3f);
-        dataSet.setSelectionShift(5f);
-        dataSet.setColors(ColorTemplate.PASTEL_COLORS);
-
-        PieData data = new PieData((dataSet));
-        data.setValueTextSize(10f);
-        data.setValueTextColor(Color.WHITE);
-
-
-        pieChart.setData(data);
-        pieChart.setUsePercentValues(false);
-        pieChart.getDescription().setEnabled(false);
-        pieChart.setExtraOffsets(5, 10, 5, 5);
-        pieChart.setDragDecelerationFrictionCoef(0.95f);
-        pieChart.setDrawHoleEnabled(true);
-        pieChart.setHoleColor(Color.WHITE);
-        pieChart.setTransparentCircleRadius(61f);
-        pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
-    }
-
-    public void createInitialIncomeChart(){
-        for(int k = 0; k < chartCategory.size(); k++){
-            for(int l = k +1; l < chartCategory.size(); l++){
-                if(chartCategory.get(k).equals(chartCategory.get(l))) {
-                    chartAmount.set(k, Float.valueOf(chartAmount.get(k)+ chartAmount.get(l)));
-                    chartCategory.remove(l);
-                    chartAmount.remove(l);
-                }
-            }
-        }
-
-        List<PieEntry> chartValues = new ArrayList<>();
-        for(int j = 0; j < chartAmount.size(); j++){
-            if(transactions.get(j).getTransaction_type().equals("Income"))
-                chartValues.add(new PieEntry(chartAmount.get(j), chartCategory.get(j)));
-        }
-
-        PieDataSet dataSet = new PieDataSet(chartValues, "Transactions");
-        dataSet.setSliceSpace(3f);
-        dataSet.setSelectionShift(5f);
-        dataSet.setColors(ColorTemplate.PASTEL_COLORS);
-
-        PieData data = new PieData((dataSet));
-        data.setValueTextSize(10f);
-        data.setValueTextColor(Color.WHITE);
-
-
-        pieChart.setData(data);
-        pieChart.setUsePercentValues(false);
-        pieChart.getDescription().setEnabled(false);
-        pieChart.setExtraOffsets(5, 10, 5, 5);
-        pieChart.setDragDecelerationFrictionCoef(0.95f);
-        pieChart.setDrawHoleEnabled(true);
-        pieChart.setHoleColor(Color.WHITE);
-        pieChart.setTransparentCircleRadius(61f);
-        pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
     }
 
     public void createIncomeChart(){
@@ -198,7 +127,7 @@ public class BudgetBreakdownActivity extends AppCompatActivity implements DatePi
         PieDataSet dataSet = new PieDataSet(chartValues, "Transactions");
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
-        dataSet.setColors(ColorTemplate.PASTEL_COLORS);
+        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
 
         PieData data = new PieData((dataSet));
         data.setValueTextSize(10f);
@@ -236,7 +165,7 @@ public class BudgetBreakdownActivity extends AppCompatActivity implements DatePi
         PieDataSet dataSet = new PieDataSet(chartValues, "Transactions");
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
-        dataSet.setColors(ColorTemplate.PASTEL_COLORS);
+        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
 
         PieData data = new PieData((dataSet));
         data.setValueTextSize(10f);
@@ -261,23 +190,27 @@ public class BudgetBreakdownActivity extends AppCompatActivity implements DatePi
         dateText.setText(date);
     }
 
-    public void Switch(View v){
-        if(switchMode == 1){
-            createInitialIncomeChart();
-            switchMode = 2;
-        }
-        else if(switchMode == 2){
-            createExpenseChart();
-            switchMode = 3;
-        }
-        else if(switchMode == 3){
-            createIncomeChart();
-            switchMode = 2;
-        }
-    }
     public void Back(View v) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        transactionType = parent.getItemAtPosition(position).toString();
+        Toast.makeText(parent.getContext(), transactionType, Toast.LENGTH_SHORT).show();
+
+        if(transactionType.equals("Expense")){
+            createExpenseChart();
+        }
+        else if(transactionType.equals("Income")){
+            createIncomeChart();
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
