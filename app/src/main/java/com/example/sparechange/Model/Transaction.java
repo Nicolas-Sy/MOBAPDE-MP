@@ -11,7 +11,8 @@ public class Transaction {
     private Date transaction_date;
     private String userID;
 
-    public Transaction(){
+    public Transaction()
+    {
 
     }
 

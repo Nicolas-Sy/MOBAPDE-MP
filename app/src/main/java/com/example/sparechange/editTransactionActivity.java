@@ -15,7 +15,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sparechange.Model.Transaction;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -26,7 +25,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class addTransactionActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class editTransactionActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     EditText tName, tAmount;
     List<Transaction> transactions;
@@ -34,14 +33,14 @@ public class addTransactionActivity extends AppCompatActivity implements DatePic
     Date transacDate;
     DatabaseReference databaseTransactions, databaseCategories;
     TextView tCategory, dateText;
-    String type;
-    String userID;
+    String type, databaseID;
     private static final String TRANSACTION_NAME = "TRANSACTION_NAME", TRANSACTION_ID = "TRANSACTION_ID", TRANSACTION_AMOUNT = "TRANSACTION_AMOUNT";
     final Format formatter = new SimpleDateFormat("MM/DD/YYYY");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_transaction);
+        setContentView(R.layout.activity_edit_transaction);
         databaseTransactions = FirebaseDatabase.getInstance().getReference("transactions");
         tName = findViewById(R.id.tName);
         tAmount = findViewById(R.id.tAmount);
@@ -50,9 +49,10 @@ public class addTransactionActivity extends AppCompatActivity implements DatePic
 
         transactions = new ArrayList<>();
 
-
-
+        Intent intent = getIntent();
+        databaseID = intent.getStringExtra("databaseID");
     }
+
     public void onClick(View v){
         Intent i = new Intent(getApplicationContext(),CategorySlider.class);
         startActivityForResult(i, 1);
@@ -71,40 +71,37 @@ public class addTransactionActivity extends AppCompatActivity implements DatePic
         }
     }
 
-    public void createTransaction(View v) {
-
+    public void updateTransaction(View v) {
         String name = tName.getText().toString();
         String category = tCategory.getText().toString();
         float amount = Float.parseFloat(tAmount.getText().toString()) * -1;
         float amount2 = Float.parseFloat(tAmount.getText().toString());
-        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         if (!(TextUtils.isEmpty(name) && TextUtils.isEmpty(type))) {
-            String id = databaseTransactions.push().getKey();
 
             if (type.equals("Expense")) {
-                Transaction transaction = new Transaction(id, name, type, category, amount, transacDate, userID);
-                databaseTransactions.child(id).setValue(transaction);
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.putExtra(TRANSACTION_NAME, name);
-                    intent.putExtra(TRANSACTION_ID, id);
-                    intent.putExtra(TRANSACTION_AMOUNT, amount);
-                    startActivity(intent);
+                Transaction transaction = new Transaction(databaseID, name, type, category, amount, transacDate);
+                databaseTransactions.child(databaseID).setValue(transaction);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra(TRANSACTION_NAME, name);
+                intent.putExtra(TRANSACTION_ID, databaseID);
+                intent.putExtra(TRANSACTION_AMOUNT, amount);
+                startActivity(intent);
             } else if (type.equals("Income")) {
-                Transaction transaction = new Transaction(id, name, type, category, amount2, transacDate, userID);
-                databaseTransactions.child(id).setValue(transaction);
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.putExtra(TRANSACTION_NAME, name);
-                    intent.putExtra(TRANSACTION_ID, id);
-                    intent.putExtra(TRANSACTION_AMOUNT, amount2);
-                    startActivity(intent);
+                Transaction transaction = new Transaction(databaseID, name, type, category, amount2, transacDate);
+                databaseTransactions.child(databaseID).setValue(transaction);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra(TRANSACTION_NAME, name);
+                intent.putExtra(TRANSACTION_ID, databaseID);
+                intent.putExtra(TRANSACTION_AMOUNT, amount2);
+                startActivity(intent);
             }
 
             tName.setText("");
             tAmount.setText("");
             tCategory.setText("");
 
-            Toast.makeText(this, "Transaction added", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Transaction updated", Toast.LENGTH_LONG).show();
 
 
         } else {
@@ -160,4 +157,4 @@ public class addTransactionActivity extends AppCompatActivity implements DatePic
         startActivity(intent);
         finish();
     }
-    }
+}
