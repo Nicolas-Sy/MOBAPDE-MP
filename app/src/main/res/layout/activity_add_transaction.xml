@@ -6,6 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".addTransactionActivity">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
     <TextView
         android:id="@+id/tCategory"
         android:layout_width="265dp"
@@ -13,9 +17,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="116dp"
-        android:layout_marginLeft="116dp"
-        android:layout_marginTop="121dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginLeft="112dp"
+        android:layout_marginTop="177dp"
         android:background="?android:attr/selectableItemBackground"
         android:clickable="true"
         android:onClick="onClick"
@@ -45,7 +49,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="147dp"
         android:layout_marginLeft="147dp"
-        android:layout_marginTop="295dp"
+        android:layout_marginTop="337dp"
         android:background="@drawable/button_background"
         android:onClick="Date"
         android:text="Choose Date" />
@@ -73,7 +77,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="111dp"
         android:layout_marginLeft="111dp"
-        android:layout_marginTop="202dp" />
+        android:layout_marginTop="250dp" />
 
     <EditText
         android:id="@+id/tAmount"
@@ -82,9 +86,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="110dp"
-        android:layout_marginLeft="110dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginLeft="104dp"
+        android:layout_marginTop="75dp"
         android:inputType="numberDecimal" />
 
     <TextView
@@ -96,7 +100,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="15dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="91dp"
         android:text="Amount:"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
@@ -107,9 +111,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="217dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="265dp"
         android:text="Memo:"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
@@ -120,9 +124,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="125dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginTop="179dp"
         android:text="Category: "
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
