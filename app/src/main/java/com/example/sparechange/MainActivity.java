@@ -1,10 +1,8 @@
 package com.example.sparechange;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -36,8 +34,10 @@ import org.joda.time.DateTime;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
 import java.util.Calendar;
 import java.util.Date;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DatePickerListener {
@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static final String TRANS_AMOUNT = "TRANS_AMOUNT";
     public static final String TRANS_DATE = "TRANS_DATE";
 
+
     private DrawerLayout drawer;
     DatabaseReference databaseTransactions, databaseUser;
     List<Transaction> transactions;
@@ -58,8 +59,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     float total, totalIncome, totalExpense;
     TextView yearMonth;
     int choosenYear = 2017;
+
     DateTime picked_date = new DateTime();
     final Format formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+    int spareCoins;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
