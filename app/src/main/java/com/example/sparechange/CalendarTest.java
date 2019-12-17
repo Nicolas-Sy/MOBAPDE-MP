@@ -69,7 +69,7 @@ public class CalendarTest extends AppCompatActivity {
                         .setActivatedYear(2017)
                         .setMaxYear(2030)
                         .setMinMonth(Calendar.FEBRUARY)
-                        .setTitle("Select trading month")
+                        .setTitle("Select Date")
                         .setMonthRange(Calendar.FEBRUARY, Calendar.NOVEMBER)
                         // .setMaxMonth(Calendar.OCTOBER)
                         // .setYearRange(1890, 1890)

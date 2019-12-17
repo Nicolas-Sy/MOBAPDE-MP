@@ -22,5 +22,16 @@
             android:title="Logout"/>
     </group>
 
-
+    <item android:title = "Sort by">
+        <menu>
+            <item
+                android:id="@+id/byYear"
+                android:icon="@drawable/year"
+                android:title="Year"/>
+            <item
+                android:id="@+id/byMonth"
+                android:icon="@drawable/month_icon"
+                android:title="Month"/>
+        </menu>
+    </item>
 </menu>

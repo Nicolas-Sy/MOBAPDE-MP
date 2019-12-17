@@ -4,21 +4,19 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="176dp"
-    android:background="@color/colorAccent"
+    android:background="@color/colorPrimary"
     android:gravity="bottom"
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
-    tools:context=".RewardsActivity">
+    tools:context=".MainActivity">
     >
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_profile"></ImageView>
+
     <TextView
         android:id="@+id/textViewUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="User"
-        ></TextView>
+        android:textSize="20dp"
+        android:textColor="@color/colorWhite"></TextView>
 </LinearLayout>

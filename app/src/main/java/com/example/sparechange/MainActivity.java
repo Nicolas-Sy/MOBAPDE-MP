@@ -2,6 +2,7 @@ package com.example.sparechange;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -20,6 +21,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.sparechange.Model.Transaction;
+import com.github.jhonnyx2012.horizontalpicker.DatePickerListener;
+import com.github.jhonnyx2012.horizontalpicker.HorizontalPicker;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -28,11 +31,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.joda.time.DateTime;
+
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, DatePickerListener {
     String TAG = "MainActivity";
     public static final String TRANS_ID = "TRANS_ID";
     public static final String TRANS_NAME = "TRANS_NAME";
@@ -44,13 +52,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     DatabaseReference databaseTransactions, databaseUser;
     List<Transaction> transactions;
-    ListView listViewTransactions;
+    ListView listViewTransactions, listViewTransactionsMonth, listViewTransactionsYear;
     TextView textViewIncome, textViewExpenses, totalAmount;
     Button addTransacBtn;
     float total, totalIncome, totalExpense;
     TextView yearMonth;
     int choosenYear = 2017;
-
+    DateTime picked_date = new DateTime();
+    final Format formatter = new SimpleDateFormat("yyyy-MM-dd");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,11 +69,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         addTransacBtn = findViewById(R.id.addTransacBtn);
         listViewTransactions = findViewById(R.id.listViewPosts);
+//        listViewTransactionsMonth = findViewById(R.id.listViewPosts2);
+//        listViewTransactionsYear =findViewById(R.id.listViewPosts3);
         totalAmount = findViewById(R.id.textViewBalance);
         textViewIncome = findViewById(R.id.textViewIncome);
         textViewExpenses = findViewById(R.id.textViewExpenses);
 
-        //For Date - final Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
@@ -75,6 +86,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        HorizontalPicker picker = findViewById(R.id.date_picker);
+           picker.setListener(this)
+                .setDays(900)
+                .setOffset(15)
+                .setDateSelectedColor(Color.DKGRAY)
+                .setDateSelectedTextColor(Color.WHITE)
+                .setMonthAndYearTextColor(Color.DKGRAY)
+                .setTodayButtonTextColor(Color.DKGRAY)
+                .setTodayDateTextColor(Color.DKGRAY)
+                .setTodayDateBackgroundColor(Color.GRAY)
+                .setUnselectedDayTextColor(Color.DKGRAY)
+                .setDayOfWeekTextColor(Color.DKGRAY)
+                .setUnselectedDayTextColor(Color.BLACK)
+                .showTodayButton(true)
+                .init();
+
+        // or on the View directly after init was completed
+        picker.setBackgroundColor(Color.LTGRAY);
+        picker.setDate(picked_date);
 
         transactions = new ArrayList<>();
 
@@ -136,7 +166,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onStart();
 
         final String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
+        total = 0;
+        totalIncome = 0;
+        totalExpense = 0;
+        total = 0;
         databaseTransactions.addValueEventListener(new ValueEventListener() {
             int z = 0;
             @Override
@@ -144,8 +177,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 transactions.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Transaction per_transaction = postSnapshot.getValue(Transaction.class);
+                    String timestamp_string = formatter.format(per_transaction.getTransaction_date());
+                    String timestamp_string2 = formatter.format(picked_date.toDate());
 
-                    if(per_transaction.getUserID().equals(userID)){
+                    if(per_transaction.getUserID().equals(userID) && (timestamp_string.equals(timestamp_string2))){
                         transactions.add(per_transaction);
                         if(per_transaction.getAmount() > 0){
                             totalIncome += per_transaction.getAmount();
@@ -155,9 +190,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         }
                     }
 
-
                     total = totalIncome + totalExpense;
-
                     textViewIncome.setText(Float.toString(totalIncome));
                     textViewExpenses.setText(Float.toString(totalExpense));
                     totalAmount.setText(Float.toString(total));
@@ -166,7 +199,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                TransactionList transactionAdapter = new TransactionList(MainActivity.this ,transactions);
                listViewTransactions.setAdapter(transactionAdapter);
-
+//               listViewTransactionsMonth.setAdapter(transactionAdapter);
+//               listViewTransactionsYear.setAdapter(transactionAdapter);
             }
 
             @Override
@@ -229,6 +263,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public float updateMoney(float money){
         total += money;
         return total;
+    }
+
+    @Override
+    public void onDateSelected(DateTime dateSelected) {
+        //Toast.makeText(this, dateSelected.toString(), Toast.LENGTH_SHORT).show();
+
+        picked_date = dateSelected;
+        onStart();
     }
 
 //    private void setNormalPicker() {

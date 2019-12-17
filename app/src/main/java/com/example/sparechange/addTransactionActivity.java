@@ -156,9 +156,5 @@ public class addTransactionActivity extends AppCompatActivity implements DatePic
         finish();
     }
 
-    public void budgetBreakdown(View v) {
-        Intent intent = new Intent(this, BudgetBreakdownActivity.class);
-        startActivity(intent);
-        finish();
-    }
+
 }
