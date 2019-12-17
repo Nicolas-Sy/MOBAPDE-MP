@@ -1,9 +1,7 @@
 package com.example.sparechange;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -29,7 +27,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -41,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static final String TRANS_AMOUNT = "TRANS_AMOUNT";
     public static final String TRANS_DATE = "TRANS_DATE";
 
+
     private DrawerLayout drawer;
     DatabaseReference databaseTransactions, databaseUser;
     List<Transaction> transactions;
@@ -50,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     float total, totalIncome, totalExpense;
     TextView yearMonth;
     int choosenYear = 2017;
+    int spareCoins;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,7 +153,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             totalExpense += per_transaction.getAmount();
                         }
                     }
-
 
                     total = totalIncome + totalExpense;
 

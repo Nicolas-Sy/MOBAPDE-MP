@@ -14,14 +14,16 @@ import com.example.sparechange.R;
 
 import java.util.List;
 
-public class RewardAdapter extends RecyclerView.Adapter<RewardAdapter.RewardViewHolder>{
+public class RewardAdapter extends RecyclerView.Adapter<RewardAdapter.RewardViewHolder> {
 
     private Context context;
     private List<Reward> rewardList;
+    private onRewardListener mOnRewardListener;
 
-    public RewardAdapter(Context context, List<Reward> rewardList) {
+    public RewardAdapter(Context context, List<Reward> rewardList, onRewardListener OnRewardListener) {
         this.context = context;
         this.rewardList = rewardList;
+        this.mOnRewardListener = OnRewardListener;
     }
 
     @Override
@@ -29,7 +31,7 @@ public class RewardAdapter extends RecyclerView.Adapter<RewardAdapter.RewardView
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.layout_rewards, null);
 
-        RewardViewHolder holder = new RewardViewHolder(view);
+        RewardViewHolder holder = new RewardViewHolder(view, mOnRewardListener);
         return holder;
     }
 
@@ -49,17 +51,32 @@ public class RewardAdapter extends RecyclerView.Adapter<RewardAdapter.RewardView
         return rewardList.size();
     }
 
-    class RewardViewHolder extends RecyclerView.ViewHolder {
+    class RewardViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView imageView;
         TextView textViewTitle, textViewCompany, textViewPrice;
-        public RewardViewHolder(@NonNull View itemView) {
+        onRewardListener OnRewardListener;
+
+        public RewardViewHolder(@NonNull View itemView, onRewardListener OnRewardListener) {
             super(itemView);
 
             imageView = itemView.findViewById(R.id.imageView);
             textViewTitle = itemView.findViewById(R.id.textViewTitle);
             textViewCompany = itemView.findViewById(R.id.textViewCompany);
             textViewPrice = itemView.findViewById(R.id.textViewPrice);
+
+            this.OnRewardListener = OnRewardListener;
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            OnRewardListener.onRewardClick(getAdapterPosition());
+        }
+    }
+
+    public interface onRewardListener {
+        void onRewardClick(int position);
+
     }
 }

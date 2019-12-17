@@ -72,15 +72,6 @@
             android:textColor="@android:color/black"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textViewDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="[DATE]"
-            android:textAppearance="?android:attr/textAppearanceButton"
-            android:layout_marginTop="2dp"
-            android:textColor="@color/colorDarkGray"
-            android:textSize="10dp"/>
 
     </LinearLayout>
 
